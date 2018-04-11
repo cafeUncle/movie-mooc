@@ -46,3 +46,13 @@ def login_log():
 @home.route("/movie_col")
 def movie_col():
     return render_template('home/movie_col.html')
+
+
+@home.route("/animation")
+def animation():
+    return render_template('home/animation.html')
+
+
+@home.route("/search")
+def search():
+    return render_template('home/search.html')

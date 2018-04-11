@@ -1,1 +1,0 @@
-console.log('this is static2 test')
