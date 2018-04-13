@@ -29,8 +29,8 @@
   "homepage": "http://www.appelsiini.net/projects/lazyload",
   "main": "jquery.lazyload.js",
   "files": [
-      "jquery.lazyload.js",
-      "jquery.scrollstop.js"
+    "jquery.lazyload.js",
+    "jquery.scrollstop.js"
   ],
   "keywords": [
     "jquery-plugin",

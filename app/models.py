@@ -1,7 +1,7 @@
 # coding:utf8
 from datetime import datetime
-from app import db
 from werkzeug.security import generate_password_hash
+from app import db
 
 
 class User(db.Model):
@@ -141,6 +141,10 @@ class Admin(db.Model):
     def __repr__(self):
         return "<Admin %r>" % self.name
 
+    def check_pwd(self, pwd):
+        from werkzeug.security import check_password_hash
+        return check_password_hash(self.pwd, pwd)
+
 
 class AdminLog(db.Model):
     __tablename__ = "admin_log"
@@ -165,11 +169,11 @@ class OpLog(db.Model):
         return "<OpLog %r>" % self.id
 
 
-if __name__ == "__main__":
-    # db.create_all()
-    # role = Role(name="超级管理员", auths="")
-    # db.session.add(role)
-    # from werkzeug.security import generate_password_hash 生成密码
-    admin = Admin(name="imoocMovie", pwd=generate_password_hash("imoocMovie"),is_super=0, role_id=1)
-    db.session.add(admin)
-    db.session.commit()
+# if __name__ == "__main__":
+#     # db.create_all()
+#     # role = Role(name="超级管理员", auths="")
+#     # db.session.add(role)
+#     # from werkzeug.security import generate_password_hash 生成密码
+#     admin = Admin(name="imoocMovie", pwd=generate_password_hash("imoocMovie"), is_super=0, role_id=1)
+#     db.session.add(admin)
+#     db.session.commit()

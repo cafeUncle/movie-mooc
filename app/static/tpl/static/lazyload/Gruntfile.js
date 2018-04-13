@@ -1,25 +1,25 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
     "use strict";
 
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
-        uglify : {
+        uglify: {
             options: {
                 banner: "/*! Lazy Load <%= pkg.version %> - MIT license - Copyright 2010-2015 Mika Tuupola */\n"
             },
             target: {
                 files: {
-                    "jquery.lazyload.min.js" : "jquery.lazyload.js",
-                    "jquery.scrollstop.min.js" : "jquery.scrollstop.js"
+                    "jquery.lazyload.min.js": "jquery.lazyload.js",
+                    "jquery.scrollstop.min.js": "jquery.scrollstop.js"
                 }
             }
         },
         watch: {
-            files: ["*.js", "!*.min.js" ,"test/spec/*Spec.js"],
+            files: ["*.js", "!*.min.js", "test/spec/*Spec.js"],
             tasks: ["test"],
         },
         jshint: {
-            files: ["*.js", "!*.min.js" ,"test/spec/*Spec.js"],
+            files: ["*.js", "!*.min.js", "test/spec/*Spec.js"],
             options: {
                 jshintrc: ".jshintrc"
             }
@@ -34,10 +34,10 @@ module.exports = function(grunt) {
         },
         connect: {
             all: {
-                options:{
+                options: {
                     port: 8080,
                     hostname: "localhost",
-                    keepalive : true
+                    keepalive: true
                 }
             }
         }

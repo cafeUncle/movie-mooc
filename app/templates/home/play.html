@@ -110,7 +110,8 @@
                         <span aria-hidden="true">×</span>
                         <span class="sr-only">Close</span>
                     </button>
-                    <strong>请先<a href="{{url_for('home.login')}}" target="_blank" class="text-info">登录</a>，才可参与评论！</strong>
+                    <strong>请先<a href="{{url_for('home.login')}}" target="_blank"
+                                 class="text-info">登录</a>，才可参与评论！</strong>
                 </div>
                 <ol class="breadcrumb" style="margin-top:6px;">
                     <li>全部评论(5)</li>
@@ -190,39 +191,39 @@
 <!--播放页面-->
 <script src="{{url_for('static',filename='jwplayer/jwplayer.js')}}"></script>
 <script>
-var ue = UE.getEditor('input_content',{
-    toolbars: [
-        ['fullscreen', 'emotion', 'preview', 'link']
-    ],
-    initialFrameWidth:"100%",
-    initialFrameHeight:"100",
-});
+    var ue = UE.getEditor('input_content', {
+        toolbars: [
+            ['fullscreen', 'emotion', 'preview', 'link']
+        ],
+        initialFrameWidth: "100%",
+        initialFrameHeight: "100",
+    });
 </script>
 <script type="text/javascript">
-	jwplayer.key = "P9VTqT/X6TSP4gi/hy1wy23BivBhjdzVjMeOaQ==";
+    jwplayer.key = "P9VTqT/X6TSP4gi/hy1wy23BivBhjdzVjMeOaQ==";
 </script>
 <script type="text/javascript">
-	jwplayer("moviecontainer").setup({
-		flashplayer: "{{url_for('static',filename='jwplayer/jwplayer.flash.swf')}}",
-		playlist: [{
-			file: "{{url_for('static',filename='video/htpy.mp4')}}",
-			title: "环太平洋"
-		}],
-		modes: [{
-			type: "html5"
-		}, {
-			type: "flash",
-			src: "{{url_for('static',filename='jwplayer/jwplayer.flash.swf')}}"
-		}, {
-			type: "download"
-		}],
-		skin: {
-			name: "vapor"
-		},
-		"playlist.position": "left",
-		"playlist.size": 400,
-		height: 500,
-		width: 774,
-	});
+    jwplayer("moviecontainer").setup({
+        flashplayer: "{{url_for('static',filename='jwplayer/jwplayer.flash.swf')}}",
+        playlist: [{
+            file: "{{url_for('static',filename='video/htpy.mp4')}}",
+            title: "环太平洋"
+        }],
+        modes: [{
+            type: "html5"
+        }, {
+            type: "flash",
+            src: "{{url_for('static',filename='jwplayer/jwplayer.flash.swf')}}"
+        }, {
+            type: "download"
+        }],
+        skin: {
+            name: "vapor"
+        },
+        "playlist.position": "left",
+        "playlist.size": 400,
+        height: 500,
+        width: 774,
+    });
 </script>
 {% endblock %}

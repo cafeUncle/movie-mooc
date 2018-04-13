@@ -13,12 +13,13 @@
     <link rel="stylesheet" href="../static/admin/dist/css/skins/_all-skins.min.css">
     <link rel="stylesheet" type="text/css" href="../static/admin/plugins/datepicker/datepicker3.css">
     <style>
-        *{
-            font-family:"Microsoft YaHei";
+        * {
+            font-family: "Microsoft YaHei";
         }
-        .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
-            vertical-align:middle;
-            text-align:center;
+
+        .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+            vertical-align: middle;
+            text-align: center;
         }
 
     </style>
@@ -361,32 +362,32 @@
 <script>
     var myChart = echarts.init(document.getElementById('meminfo'));
     option = {
-		backgroundColor: "white",
-		tooltip: {
-			formatter: "{a} <br/>{b} : {c}%"
-		},
-		toolbox: {
-			feature: {
-				restore: {},
-				saveAsImage: {}
-			}
-		},
-		series: [{
-			name: '内存使用率',
-			type: 'gauge',
-			detail: {
-				formatter: '{value}%'
-			},
-			data: [{
-				value: 50,
-				name: '内存使用率'
-			}]
-		}]
-	};
+        backgroundColor: "white",
+        tooltip: {
+            formatter: "{a} <br/>{b} : {c}%"
+        },
+        toolbox: {
+            feature: {
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        series: [{
+            name: '内存使用率',
+            type: 'gauge',
+            detail: {
+                formatter: '{value}%'
+            },
+            data: [{
+                value: 50,
+                name: '内存使用率'
+            }]
+        }]
+    };
     setInterval(function () {
         option.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0;
         myChart.setOption(option, true);
-    },2000);
+    }, 2000);
 
 </script>
 
