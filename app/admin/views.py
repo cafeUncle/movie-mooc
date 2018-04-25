@@ -4,20 +4,20 @@ import os
 import uuid
 from functools import wraps
 
-from flask import render_template, redirect, url_for, flash, session, request, abort
+from flask import render_template, redirect, url_for, flash, session, request, abort, Response
 from werkzeug.utils import secure_filename
 
-from app import db, app
+from app import db, app, rd
 from app.admin import admin
 from app.admin.forms import LoginForm, TagForm, MovieForm, AuthForm, RoleForm
-from app.models import Admin, Tag, Movie, OpLog, AdminLog, Auth, Role
+from app.models import Admin, Tag, Movie, OpLog, AdminLog, Auth, Role, MovieCol, User
 
 
 # 上下文应用处理器 封装全局变量，展现到模板中
 @admin.context_processor
 def tpl_extra():
     data = dict(
-        online_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        online_time=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     )
     return data
 
@@ -467,3 +467,69 @@ def admin_add():
 @admin_login_req
 def admin_list():
     return render_template("admin/admin_list.html")
+
+
+@admin.route("/json")
+def get_json():
+    import json
+    return json.dumps({"t": str(datetime.datetime.now()), 'action': 'getJson'})
+
+
+# page_data = MovieCol.query.join(
+#     Movie
+# ).join(
+#     User
+# ).filter(
+#     Movie.id == MovieCol.movie_id,
+#     User.id == 1
+# ).filter_by(
+#     Movie.title == '战狼'
+# ).order_by(
+#     Movie.add_time.desc()
+# ).paginate(
+#     page=1,
+#     per_page=10
+# )
+
+
+# pip install flask-redis
+
+def dan_man():
+    import json
+    if request.method == 'GET':
+        id = request.args.get('id')
+        key = 'movie' + str(id)  # 拼接key值
+        if rd.llen(key):  # 如果有
+            msgs = rd.lrange(key, 0, 2999)
+            res = {
+                "code": 1,
+                "danmuku": [json.loads(v) for v in msgs]
+            }
+        else:
+            res = {
+                "code": 1,
+                "danmuku": []
+            }
+        resp = json.dumps(res)
+    if request.method == 'POST':
+        data = json.loads(request.get_data())
+        msg = {
+            "_v": 0,
+            "author": data["author"],
+            "time": data["time"],
+            "text": data["text"],
+            "color": data["color"],
+            "type": data["type"],
+            "ip": request.remote_addr,
+            "_id": datetime.datetime.now().strftime("%Y%m%d%H%M%S") + uuid.uuid4().hex,
+            "player": [
+                data["player"]
+            ]
+        }
+        res = {
+            "code": 1,
+            "data": msg
+        }
+        resp = json.dumps(res)
+        rd.lpush("movie" + str(data["player"]), json.dumps(msg))
+    return Response(resp, mimetype='application/json')
